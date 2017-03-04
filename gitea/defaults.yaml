@@ -1,7 +1,36 @@
-# -*- coding: utf-8 -*-
-# vim: ft=yaml
-template:
-  pkg: template
-  config: '/etc/template'
+gitea:
+  pkg: gitea
+  config: '/var/lib/gitea/custom/conf/app.ini'
   service:
-    name: template
+    name: gitea
+  version: "1.0.2"
+  sha256: "02ed9a3bb7bcd1c8f3d8888e51a0887b3c0f44b2a80d50c99f9e407e457545ab"
+  database:
+    host: 127.0.0.1:5432
+    name: gitea
+    user: gitea
+    password: databaseSecretPassword
+    ssl: false
+  repository:
+    root: /var/lib/git/gitea-repositories
+  server:
+    domain: git.example.com
+    port: 3000
+    https: true
+  ssh:
+    enable: false
+    port: 2222
+  mailer:
+    enable: true
+    hostname: mail.example.com
+    hostandport: mail.example.com:587
+    from_address: git@example.com
+    smtp_user: git@example.com
+    smtp_password: secretPassword1234
+    skip_verify: false
+  service:
+    disable_registration: true
+    require_signin_view: true
+  security:
+    remember_password_days: 30
+    secret_key: yourUniqueSecretKey
