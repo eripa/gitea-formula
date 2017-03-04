@@ -1,5 +1,4 @@
 gitea:
-  pkg: gitea
   config: '/var/lib/gitea/custom/conf/app.ini'
   service:
     name: gitea
@@ -12,7 +11,7 @@ gitea:
     password: databaseSecretPassword
     ssl: false
   repository:
-    root: /var/lib/git/gitea-repositories
+    root: /var/lib/gitea/gitea-repositories
   server:
     domain: git.example.com
     port: 3000
