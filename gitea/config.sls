@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "template/map.jinja" import template with context %}
+{% from "gitea/map.jinja" import gitea with context %}
 
-template-config:
+/var/lib/gitea/custom/conf/app.ini:
   file.managed:
-    - name: {{ template.config }}
-    - source: salt://template/files/example.tmpl
-    - mode: 644
-    - user: root
-    - group: root
+    - source: salt://gitea/app.ini.j2
+    - template: jinja
+    - user: git
+    - group: git
+    - mode: 640
+    - makedirs: True
+    - require:
+      - git

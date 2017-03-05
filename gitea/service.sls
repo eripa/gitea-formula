@@ -1,9 +1,19 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{% from "template/map.jinja" import template with context %}
+{% from "gitea/map.jinja" import gitea with context %}
 
-template-name:
+gitea:
   service.running:
-    - name: {{ template.service.name }}
     - enable: True
+    - full_restart: True
+    - watch:
+      - file: /var/lib/gitea/gitea
+
+/etc/systemd/system/gitea.service:
+  file.managed:
+    - source: salt://gitea/gitea.service
+    - user: root
+    - group: root
+    - mode: 644
+    - makedirs: True

@@ -1,0 +1,101 @@
+{% from "gitea/files/map.jinja" import gitea with context %}
+APP_NAME = Gitea - Git with a cup of tea
+RUN_USER = git
+RUN_MODE = prod
+
+[database]
+DB_TYPE = postgres
+HOST = {{ gitea.database.host }}
+NAME = {{ gitea.database.name }}
+USER = {{ gitea.database.user }}
+PASSWD = {{ gitea.database.password }}
+{%- if gitea.database.ssl %}
+SSL_MODE = enable
+{%- else %}
+SSL_MODE = disable
+{%- endif %}
+
+[repository]
+ROOT = {{ gitea.repository.root }}
+
+[server]
+DOMAIN = {{ gitea.server.domain }}
+HTTP_PORT = {{ gitea.server.port }}
+{%- if gitea.server.https %}
+ROOT_URL = https://{{ gitea.server.domain }}/
+{%- else %}
+ROOT_URL = http://{{ gitea.server.domain }}/
+{%- endif %}
+{%- if gitea.ssh.enable %}
+DISABLE_SSH = false
+START_SSH_SERVER = true
+{%- else %}
+START_SSH_SERVER = false
+DISABLE_SSH = enable
+{%- endif %}
+SSH_DOMAIN = {{ gitea.server.domain }}
+SSH_PORT = {{ gitea.ssh.port }}
+SSH_LISTEN_PORT = {{ gitea.ssh.port }}
+OFFLINE_MODE = false
+
+[mailer]
+{%- if gitea.mailer.enable %}
+ENABLED = true
+{%- else %}
+ENABLED = false
+{%- endif %}
+HELO_HOSTNAME = {{ gitea.mailer.hostname }}
+HOST = {{ gitea.mailer.hostandport }}
+FROM = {{ gitea.mailer.from_address }}
+USER = {{ gitea.mailer.smtp_user }}
+PASSWD = {{ gitea.mailer.smtp_password }}
+{%- if gitea.mailer.skip_verify %}
+SKIP_VERIFY = true
+{%- else %}
+SKIP_VERIFY = false
+{%- endif %}
+
+[service]
+REGISTER_EMAIL_CONFIRM = false
+{%- if gitea.service.disable_registration %}
+DISABLE_REGISTRATION = true
+{%- else %}
+DISABLE_REGISTRATION = false
+{%- endif %}
+ENABLE_CAPTCHA = true
+{%- if gitea.service.require_signin_view %}
+REQUIRE_SIGNIN_VIEW = true
+{%- else %}
+REQUIRE_SIGNIN_VIEW = true
+{%- endif %}
+ENABLE_NOTIFY_MAIL = true
+
+[picture]
+DISABLE_GRAVATAR = false
+
+[cron]
+ENABLED = true
+SCHEDULE = @every 1h
+
+[session]
+PROVIDER = file
+{%- if gitea.server.https %}
+COOKIE_SECURE = true
+{%- else %}
+COOKIE_SECURE = false
+{%- endif %}
+COOKIE_NAME = i_like_gitea
+
+[log]
+MODE = file
+LEVEL = Info
+
+[security]
+INSTALL_LOCK = true
+SECRET_KEY = {{ gitea.security.secret_key }}
+LOGIN_REMEMBER_DAYS = {{ gitea.security.remember_password_days }}
+COOKIE_USERNAME = giteauser
+COOKIE_REMEMBER_NAME = giteausersession
+
+[other]
+SHOW_FOOTER_BRANDING = false
