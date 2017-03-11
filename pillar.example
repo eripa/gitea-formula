@@ -1,3 +1,32 @@
-template:
-  lookup:
-    master: template-master
+gitea:
+  version: "1.1.0"
+  database:
+    host: 192.168.12.12:5432
+    name: gitea
+    user: git
+    ssl: false
+  repository:
+    root: /var/lib/gitea/gitea-repositories
+  server:
+    domain: git.example.com
+    port: 3000
+    https: true
+  ssh:
+    enable: true
+    port: 22
+  mailer:
+    enable: true
+    hostname: mail.example.com
+    hostandport: mail.example.com:587
+    from_address: git@example.com
+    smtp_user: git@example.com
+    skip_verify: false
+  service:
+    disable_registration: true
+    require_signin_view: true
+  security:
+    remember_password_days: 30
+  picture:
+    disable_gravatar: true
+  other:
+    show_footer_branding: true
