@@ -20,62 +20,37 @@ ROOT = {{ gitea.repository.root }}
 
 [server]
 DOMAIN = {{ gitea.server.domain }}
-HTTP_PORT = {{ gitea.server.port }}
+HTTP_PORT = {{ gitea.server.http_port }}
 {%- if gitea.server.https %}
 ROOT_URL = https://{{ gitea.server.domain }}/
 {%- else %}
 ROOT_URL = http://{{ gitea.server.domain }}/
 {%- endif %}
-{%- if gitea.ssh.enable %}
-DISABLE_SSH = false
-START_SSH_SERVER = true
-{%- else %}
-START_SSH_SERVER = false
-DISABLE_SSH = enable
-{%- endif %}
+DISABLE_SSH = {{ gitea.server.disable_ssh }}
+START_SSH_SERVER = {{ gitea.server.start_ssh_server }}
 SSH_DOMAIN = {{ gitea.server.domain }}
-SSH_PORT = {{ gitea.ssh.port }}
-SSH_LISTEN_PORT = {{ gitea.ssh.port }}
-OFFLINE_MODE = false
+SSH_PORT = {{ gitea.server.ssh_port }}
+SSH_LISTEN_PORT = {{ gitea.server.ssh_listen_port }}
+OFFLINE_MODE = {{ gitea.server.offline_mode }}
 
 [mailer]
-{%- if gitea.mailer.enable %}
-ENABLED = true
-{%- else %}
-ENABLED = false
-{%- endif %}
+ENABLED = {{ gitea.mailer.enable }}
 HELO_HOSTNAME = {{ gitea.mailer.hostname }}
 HOST = {{ gitea.mailer.hostandport }}
 FROM = {{ gitea.mailer.from_address }}
 USER = {{ gitea.mailer.smtp_user }}
 PASSWD = {{ gitea.mailer.smtp_password }}
-{%- if gitea.mailer.skip_verify %}
-SKIP_VERIFY = true
-{%- else %}
-SKIP_VERIFY = false
-{%- endif %}
+SKIP_VERIFY = {{ gitea.mailer.skip_verify }}
 
 [service]
-REGISTER_EMAIL_CONFIRM = false
-{%- if gitea.service.disable_registration %}
-DISABLE_REGISTRATION = true
-{%- else %}
-DISABLE_REGISTRATION = false
-{%- endif %}
-ENABLE_CAPTCHA = true
-{%- if gitea.service.require_signin_view %}
-REQUIRE_SIGNIN_VIEW = true
-{%- else %}
-REQUIRE_SIGNIN_VIEW = false
-{%- endif %}
-ENABLE_NOTIFY_MAIL = true
+REGISTER_EMAIL_CONFIRM = {{ gitea.service.register_email_confirm }}
+DISABLE_REGISTRATION = {{ gitea.service.disable_registration }}
+ENABLE_CAPTCHA = {{ gitea.service.enable_captcha }}
+REQUIRE_SIGNIN_VIEW = {{ gitea.service.require_signin_view }}
+ENABLE_NOTIFY_MAIL = {{ gitea.service.enable_notify_mail }}
 
 [picture]
-{%- if gitea.picture.disable_gravatar %}
-DISABLE_GRAVATAR = true
-{%- else %}
-DISABLE_GRAVATAR = false
-{%- endif %}
+DISABLE_GRAVATAR = {{ gitea.picture.disable_gravatar }}
 
 [cron]
 ENABLED = true
@@ -83,11 +58,7 @@ SCHEDULE = @every 1h
 
 [session]
 PROVIDER = file
-{%- if gitea.server.https %}
-COOKIE_SECURE = true
-{%- else %}
-COOKIE_SECURE = false
-{%- endif %}
+COOKIE_SECURE = {{ gitea.server.https }}
 COOKIE_NAME = i_like_gitea
 
 [log]
@@ -102,8 +73,4 @@ COOKIE_USERNAME = giteauser
 COOKIE_REMEMBER_NAME = giteausersession
 
 [other]
-{%- if gitea.other.show_footer_branding %}
-SHOW_FOOTER_BRANDING = true
-{%- else %}
-SHOW_FOOTER_BRANDING = false
-{%- endif %}
+SHOW_FOOTER_BRANDING = {{ gitea.other.show_footer_branding }}

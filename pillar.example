@@ -9,11 +9,14 @@ gitea:
     root: /var/lib/gitea/gitea-repositories
   server:
     domain: git.example.com
-    port: 3000
     https: true
-  ssh:
-    enable: true
-    port: 22
+    http_port: 3000
+    https: true
+    disable_ssh: false
+    start_ssh_server: true
+    ssh_port: 2222
+    ssh_listen_port: 2222
+    offline_mode: false
   mailer:
     enable: true
     hostname: mail.example.com

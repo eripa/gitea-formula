@@ -14,11 +14,13 @@ gitea:
     root: /var/lib/gitea/gitea-repositories
   server:
     domain: git.example.com
-    port: 3000
+    http_port: 3000
     https: true
-  ssh:
-    enable: false
-    port: 2222
+    disable_ssh: true
+    start_ssh_server: false
+    ssh_port: 2222
+    ssh_listen_port: 2222
+    offline_mode: false
   mailer:
     enable: true
     hostname: mail.example.com
@@ -28,8 +30,11 @@ gitea:
     smtp_password: secretPassword1234
     skip_verify: false
   service:
+    register_email_confirm: true
     disable_registration: true
     require_signin_view: true
+    enable_captcha: true
+    enable_notify_mail: true
   security:
     remember_password_days: 30
     secret_key: yourUniqueSecretKey
