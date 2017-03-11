@@ -1,10 +1,12 @@
 gitea:
   version: "1.1.0"
   database:
+    type: postgres # mysql, postgres, mssql or sqlite3
     host: 192.168.12.12:5432
     name: gitea
     user: git
     ssl: false
+    path: data/gitea.db # for sqlite3
   repository:
     root: /var/lib/gitea/gitea-repositories
   server:

@@ -4,7 +4,7 @@ RUN_USER = git
 RUN_MODE = prod
 
 [database]
-DB_TYPE = postgres
+DB_TYPE = {{ gitea.database.type }}
 HOST = {{ gitea.database.host }}
 NAME = {{ gitea.database.name }}
 USER = {{ gitea.database.user }}
@@ -14,6 +14,7 @@ SSL_MODE = enable
 {%- else %}
 SSL_MODE = disable
 {%- endif %}
+PATH = {{ gitea.database.path }}
 
 [repository]
 ROOT = {{ gitea.repository.root }}
