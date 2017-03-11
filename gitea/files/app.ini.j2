@@ -1,5 +1,5 @@
 {% from "gitea/map.jinja" import gitea with context %}
-APP_NAME = Gitea - Git with a cup of tea
+APP_NAME = {{ gitea.service.app_name }}
 RUN_USER = git
 RUN_MODE = prod
 
@@ -20,6 +20,7 @@ ROOT = {{ gitea.repository.root }}
 
 [server]
 DOMAIN = {{ gitea.server.domain }}
+HTTP_ADDR = {{ gitea.server.http_addr }}
 HTTP_PORT = {{ gitea.server.http_port }}
 {%- if gitea.server.https %}
 ROOT_URL = https://{{ gitea.server.domain }}/
@@ -32,6 +33,11 @@ SSH_DOMAIN = {{ gitea.server.domain }}
 SSH_PORT = {{ gitea.server.ssh_port }}
 SSH_LISTEN_PORT = {{ gitea.server.ssh_listen_port }}
 OFFLINE_MODE = {{ gitea.server.offline_mode }}
+LFS_START_SERVER = {{ gitea.server.lfs_start_server }}
+LFS_CONTENT_PATH = {{ gitea.server.lfs_content_path }}
+LFS_JWT_SECRET = {{ gitea.server.lfs_jwt_secret }}
+ENABLE_GZIP = {{ gitea.server.enable_gzip }}
+LANDING_PAGE = {{ gitea.server.landing_page }}
 
 [mailer]
 ENABLED = {{ gitea.mailer.enable }}
@@ -51,6 +57,13 @@ ENABLE_NOTIFY_MAIL = {{ gitea.service.enable_notify_mail }}
 
 [picture]
 DISABLE_GRAVATAR = {{ gitea.picture.disable_gravatar }}
+
+[attachment]
+ENABLED = {{ gitea.attachment.enabled }}
+PATH = {{ gitea.attachment.path }}
+ALLOWED_TYPES = {{ gitea.attachment.allowed_types }}
+MAX_SIZE = {{ gitea.attachment.max_size }}
+MAX_FILES = {{ gitea.attachment.max_files }}
 
 [cron]
 ENABLED = true
@@ -74,3 +87,4 @@ COOKIE_REMEMBER_NAME = giteausersession
 
 [other]
 SHOW_FOOTER_BRANDING = {{ gitea.other.show_footer_branding }}
+SHOW_FOOTER_VERSION = {{ gitea.other.show_footer_version }}

@@ -14,6 +14,7 @@ gitea:
     root: /var/lib/gitea/gitea-repositories
   server:
     domain: git.example.com
+    http_addr: 0.0.0.0
     http_port: 3000
     https: true
     disable_ssh: true
@@ -21,6 +22,11 @@ gitea:
     ssh_port: 2222
     ssh_listen_port: 2222
     offline_mode: false
+    lfs_start_server: false
+    lfs_content_path: data/lfs
+    lfs_jwt_secret: createYourOwnJWTSecret
+    enable_gzip: false
+    landing_page: home
   mailer:
     enable: true
     hostname: mail.example.com
@@ -30,15 +36,23 @@ gitea:
     smtp_password: secretPassword1234
     skip_verify: false
   service:
+    app_name: Gitea - Git with a cup of tea
     register_email_confirm: true
     disable_registration: true
     require_signin_view: true
     enable_captcha: true
     enable_notify_mail: true
+  picture:
+    disable_gravatar: false
+  attachment:
+    enabled: true
+    path: data/attachments
+    allowed_types: image/jpeg|image/png
+    max_size: 8
+    max_files: 5
   security:
     remember_password_days: 30
     secret_key: yourUniqueSecretKey
-  picture:
-    disable_gravatar: false
   other:
     show_footer_branding: true
+    show_footer_version: true

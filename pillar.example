@@ -10,6 +10,7 @@ gitea:
   server:
     domain: git.example.com
     https: true
+    http_addr: 127.0.0.1
     http_port: 3000
     https: true
     disable_ssh: false
@@ -17,6 +18,10 @@ gitea:
     ssh_port: 2222
     ssh_listen_port: 2222
     offline_mode: false
+    lfs_start_server: false
+    lfs_content_path: data/lfs
+    enable_gzip: false
+    landing_page: home
   mailer:
     enable: true
     hostname: mail.example.com
@@ -25,11 +30,19 @@ gitea:
     smtp_user: git@example.com
     skip_verify: false
   service:
+    app_name: Gitea
     disable_registration: true
     require_signin_view: true
-  security:
-    remember_password_days: 30
   picture:
     disable_gravatar: true
+  attachment:
+    enabled: true
+    path: data/attachments
+    allowed_types: image/jpeg|image/png|application/x-tar|application/zip
+    max_size: 8
+    max_files: 5
+  security:
+    remember_password_days: 30
   other:
     show_footer_branding: true
+    show_footer_version: true
