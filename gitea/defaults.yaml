@@ -53,6 +53,7 @@ gitea:
     max_size: 8
     max_files: 5
   security:
+    install_lock: true
     remember_password_days: 30
     secret_key: yourUniqueSecretKey
   other:

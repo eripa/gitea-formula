@@ -44,6 +44,7 @@ gitea:
     max_size: 8
     max_files: 5
   security:
+    install_lock: true # This should be False **ONLY** during the first install
     remember_password_days: 30
   other:
     show_footer_branding: true
