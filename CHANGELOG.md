@@ -6,4 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
+- Should mostly work after commit '9302b83'
+- Updated README and pillar examples
 - Adapted repository from [template-formula](https://github.com/saltstack-formulas/template-formula.git)
