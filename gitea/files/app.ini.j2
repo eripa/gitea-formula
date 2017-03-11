@@ -81,7 +81,13 @@ LEVEL = Info
 
 [security]
 INSTALL_LOCK = {{ gitea.security.install_lock }}
-SECRET_KEY = {{ gitea.security.secret_key }}
+SECRET_KEY = {{ gitea.get('security.secret_key', salt['grains.get_or_set_hash'](
+    'gitea:security_secret_key',
+    length=15,
+    chars=('abcdefghijklmnopqrstuvwxyz' +
+           'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+           '12345678790')
+)) }}
 LOGIN_REMEMBER_DAYS = {{ gitea.security.remember_password_days }}
 COOKIE_USERNAME = giteauser
 COOKIE_REMEMBER_NAME = giteausersession

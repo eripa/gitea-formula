@@ -55,7 +55,6 @@ gitea:
   security:
     install_lock: true
     remember_password_days: 30
-    secret_key: yourUniqueSecretKey
   other:
     show_footer_branding: true
     show_footer_version: true
