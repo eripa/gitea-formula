@@ -33,3 +33,7 @@ gitea:
   security:
     remember_password_days: 30
     secret_key: yourUniqueSecretKey
+  picture:
+    disable_gravatar: false
+  other:
+    show_footer_branding: true

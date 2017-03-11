@@ -66,12 +66,16 @@ ENABLE_CAPTCHA = true
 {%- if gitea.service.require_signin_view %}
 REQUIRE_SIGNIN_VIEW = true
 {%- else %}
-REQUIRE_SIGNIN_VIEW = true
+REQUIRE_SIGNIN_VIEW = false
 {%- endif %}
 ENABLE_NOTIFY_MAIL = true
 
 [picture]
+{%- if gitea.picture.disable_gravatar %}
+DISABLE_GRAVATAR = true
+{%- else %}
 DISABLE_GRAVATAR = false
+{%- endif %}
 
 [cron]
 ENABLED = true
@@ -98,4 +102,8 @@ COOKIE_USERNAME = giteauser
 COOKIE_REMEMBER_NAME = giteausersession
 
 [other]
+{%- if gitea.other.show_footer_branding %}
+SHOW_FOOTER_BRANDING = true
+{%- else %}
 SHOW_FOOTER_BRANDING = false
+{%- endif %}
