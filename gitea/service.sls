@@ -9,10 +9,11 @@ gitea:
     - full_restart: True
     - watch:
       - file: /var/lib/gitea/gitea
+      - file: /var/lib/gitea/custom/conf/app.ini
 
 /etc/systemd/system/gitea.service:
   file.managed:
-    - source: salt://gitea/gitea.service
+    - source: salt://gitea/files/gitea.service
     - user: root
     - group: root
     - mode: 644

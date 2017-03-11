@@ -5,7 +5,7 @@
 
 /var/lib/gitea/custom/conf/app.ini:
   file.managed:
-    - source: salt://gitea/app.ini.j2
+    - source: salt://gitea/files/app.ini.j2
     - template: jinja
     - user: git
     - group: git

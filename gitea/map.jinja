@@ -11,18 +11,14 @@ that differ from whats in defaults.yaml
 {% set os_family_map = salt['grains.filter_by']({
         'Debian': {},
         'Suse': {},
-        'Arch': {
-            "pkg" : 'template-arch',
-        },
-        'RedHat': {
-            "config": '/etc/template.conf',
-        },
+        'Arch': { },
+        'RedHat': { },
   }
   , grain="os_family"
-  , merge=salt['pillar.get']('template:lookup'))
+  , merge=salt['pillar.get']('gitea:lookup'))
 %}
 {## Merge the flavor_map to the default settings ##}
-{% do default_settings.template.update(os_family_map) %}
+{% do default_settings.gitea.update(os_family_map) %}
 
 {## Merge in gitea:lookup pillar ##}
 {% set gitea = salt['pillar.get'](
