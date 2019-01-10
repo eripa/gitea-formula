@@ -14,7 +14,7 @@ SSL_MODE = enable
 {%- else %}
 SSL_MODE = disable
 {%- endif %}
-PATH = {{ gitea.database.path }}
+PATH     = {{ gitea.database.path }}
 
 [repository]
 ROOT = {{ gitea.repository.root }}
