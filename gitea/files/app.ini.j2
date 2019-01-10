@@ -4,11 +4,11 @@ RUN_USER = git
 RUN_MODE = prod
 
 [database]
-DB_TYPE = {{ gitea.database.type }}
-HOST = {{ gitea.database.host }}
-NAME = {{ gitea.database.name }}
-USER = {{ gitea.database.user }}
-PASSWD = {{ gitea.database.password }}
+DB_TYPE  = {{ gitea.database.type }}
+HOST     = {{ gitea.database.host }}
+NAME     = {{ gitea.database.name }}
+USER     = {{ gitea.database.user }}
+PASSWD   = {{ gitea.database.password }}
 {%- if gitea.database.ssl %}
 SSL_MODE = enable
 {%- else %}
@@ -20,78 +20,78 @@ PATH = {{ gitea.database.path }}
 ROOT = {{ gitea.repository.root }}
 
 [server]
-DOMAIN = {{ gitea.server.domain }}
-HTTP_ADDR = {{ gitea.server.http_addr }}
-HTTP_PORT = {{ gitea.server.http_port }}
+DOMAIN           = {{ gitea.server.domain }}
+HTTP_ADDR        = {{ gitea.server.http_addr }}
+HTTP_PORT        = {{ gitea.server.http_port }}
 {%- if gitea.server.https %}
-ROOT_URL = https://{{ gitea.server.domain }}/
+ROOT_URL         = https://{{ gitea.server.domain }}/
 {%- else %}
-ROOT_URL = http://{{ gitea.server.domain }}/
+ROOT_URL         = http://{{ gitea.server.domain }}/
 {%- endif %}
-DISABLE_SSH = {{ gitea.server.disable_ssh }}
+DISABLE_SSH      = {{ gitea.server.disable_ssh }}
 START_SSH_SERVER = {{ gitea.server.start_ssh_server }}
-SSH_DOMAIN = {{ gitea.server.domain }}
-SSH_PORT = {{ gitea.server.ssh_port }}
-SSH_LISTEN_PORT = {{ gitea.server.ssh_listen_port }}
-OFFLINE_MODE = {{ gitea.server.offline_mode }}
+SSH_DOMAIN       = {{ gitea.server.domain }}
+SSH_PORT         = {{ gitea.server.ssh_port }}
+SSH_LISTEN_PORT  = {{ gitea.server.ssh_listen_port }}
+OFFLINE_MODE     = {{ gitea.server.offline_mode }}
 LFS_START_SERVER = {{ gitea.server.lfs_start_server }}
 LFS_CONTENT_PATH = {{ gitea.server.lfs_content_path }}
-LFS_JWT_SECRET = {{ gitea.server.lfs_jwt_secret }}
-ENABLE_GZIP = {{ gitea.server.enable_gzip }}
-LANDING_PAGE = {{ gitea.server.landing_page }}
+LFS_JWT_SECRET   = {{ gitea.server.lfs_jwt_secret }}
+ENABLE_GZIP      = {{ gitea.server.enable_gzip }}
+LANDING_PAGE     = {{ gitea.server.landing_page }}
 
 [mailer]
-ENABLED = {{ gitea.mailer.enable }}
+ENABLED       = {{ gitea.mailer.enable }}
 HELO_HOSTNAME = {{ gitea.mailer.hostname }}
-HOST = {{ gitea.mailer.hostandport }}
-FROM = {{ gitea.mailer.from_address }}
-USER = {{ gitea.mailer.smtp_user }}
-PASSWD = {{ gitea.mailer.smtp_password }}
-SKIP_VERIFY = {{ gitea.mailer.skip_verify }}
+HOST          = {{ gitea.mailer.hostandport }}
+FROM          = {{ gitea.mailer.from_address }}
+USER          = {{ gitea.mailer.smtp_user }}
+PASSWD        = {{ gitea.mailer.smtp_password }}
+SKIP_VERIFY   = {{ gitea.mailer.skip_verify }}
 
 [service]
 REGISTER_EMAIL_CONFIRM = {{ gitea.service.register_email_confirm }}
-DISABLE_REGISTRATION = {{ gitea.service.disable_registration }}
-ENABLE_CAPTCHA = {{ gitea.service.enable_captcha }}
-REQUIRE_SIGNIN_VIEW = {{ gitea.service.require_signin_view }}
-ENABLE_NOTIFY_MAIL = {{ gitea.service.enable_notify_mail }}
+DISABLE_REGISTRATION   = {{ gitea.service.disable_registration }}
+ENABLE_CAPTCHA         = {{ gitea.service.enable_captcha }}
+REQUIRE_SIGNIN_VIEW    = {{ gitea.service.require_signin_view }}
+ENABLE_NOTIFY_MAIL     = {{ gitea.service.enable_notify_mail }}
 
 [picture]
 DISABLE_GRAVATAR = {{ gitea.picture.disable_gravatar }}
 
 [attachment]
-ENABLED = {{ gitea.attachment.enabled }}
-PATH = {{ gitea.attachment.path }}
+ENABLED       = {{ gitea.attachment.enabled }}
+PATH          = {{ gitea.attachment.path }}
 ALLOWED_TYPES = {{ gitea.attachment.allowed_types }}
-MAX_SIZE = {{ gitea.attachment.max_size }}
-MAX_FILES = {{ gitea.attachment.max_files }}
+MAX_SIZE      = {{ gitea.attachment.max_size }}
+MAX_FILES     = {{ gitea.attachment.max_files }}
 
 [cron]
-ENABLED = true
+ENABLED  = true
 SCHEDULE = @every 1h
 
 [session]
-PROVIDER = file
+PROVIDER      = file
 COOKIE_SECURE = {{ gitea.server.https }}
-COOKIE_NAME = i_like_gitea
+COOKIE_NAME   = i_like_gitea
 
 [log]
-MODE = file
-LEVEL = Info
+MODE  = {{ gitea.log.mode }}
+LEVEL = {{ gitea.log.level }}
 
 [security]
-INSTALL_LOCK = {{ gitea.security.install_lock }}
-SECRET_KEY = {{ gitea.get('security.secret_key', salt['grains.get_or_set_hash'](
+INSTALL_LOCK         = {{ gitea.security.install_lock }}
+SECRET_KEY           = {{ gitea.get('security.secret_key', salt['grains.get_or_set_hash'](
     'gitea:security_secret_key',
     length=15,
     chars=('abcdefghijklmnopqrstuvwxyz' +
            'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
            '12345678790')
 )) }}
-LOGIN_REMEMBER_DAYS = {{ gitea.security.remember_password_days }}
-COOKIE_USERNAME = giteauser
+LOGIN_REMEMBER_DAYS  = {{ gitea.security.remember_password_days }}
+COOKIE_USERNAME      = giteauser
 COOKIE_REMEMBER_NAME = giteausersession
 
 [other]
 SHOW_FOOTER_BRANDING = {{ gitea.other.show_footer_branding }}
-SHOW_FOOTER_VERSION = {{ gitea.other.show_footer_version }}
+SHOW_FOOTER_VERSION  = {{ gitea.other.show_footer_version }}

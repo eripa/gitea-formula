@@ -52,6 +52,9 @@ gitea:
     allowed_types: image/jpeg|image/png
     max_size: 8
     max_files: 5
+  log:
+    mode: file
+    level: Info
   security:
     install_lock: true
     remember_password_days: 30
