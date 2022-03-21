@@ -1,7 +1,5 @@
 gitea:
   config: '/var/lib/gitea/custom/conf/app.ini'
-  service:
-    name: gitea
   version: "1.0.2"
   sha256: "02ed9a3bb7bcd1c8f3d8888e51a0887b3c0f44b2a80d50c99f9e407e457545ab"
   database:
@@ -38,6 +36,7 @@ gitea:
     smtp_password: secretPassword1234
     skip_verify: false
   service:
+    name: gitea
     app_name: Gitea - Git with a cup of tea
     register_email_confirm: true
     disable_registration: true
