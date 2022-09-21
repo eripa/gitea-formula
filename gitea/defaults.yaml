@@ -57,6 +57,8 @@ gitea:
   security:
     install_lock: true
     remember_password_days: 30
+  webhook:
+    allowed_host_list: loopback
   other:
     show_footer_branding: true
     show_footer_version: true

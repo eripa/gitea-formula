@@ -92,6 +92,9 @@ LOGIN_REMEMBER_DAYS  = {{ gitea.security.remember_password_days }}
 COOKIE_USERNAME      = giteauser
 COOKIE_REMEMBER_NAME = giteausersession
 
+[webhook]
+ALLOWED_HOST_LIST = {{ gitea.webhook.allowed_host_list }}
+
 [other]
 SHOW_FOOTER_BRANDING = {{ gitea.other.show_footer_branding }}
 SHOW_FOOTER_VERSION  = {{ gitea.other.show_footer_version }}
